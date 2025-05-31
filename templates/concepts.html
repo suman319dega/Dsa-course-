@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Revision - Suman Codes</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0px 0px 10px #ff416c; }
+            to { text-shadow: 0px 0px 20px #ff4b2b; }
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+
+        .dsa-topic {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .dsa-topic:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .topic-details {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DSA Revision</h1>
+        <p>Track your progress and master the basics of DSA.</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span class="progress-text" id="progress-text">0%</span>
+        </div>
+
+        <div id="topics"></div>
+    </div>
+
+    <script>
+        const topics = [
+            { name: "Arrays & Strings", details: "Arrays and Strings are fundamental data structures in DSA." },
+            { name: "Linked Lists", details: "Linked lists consist of nodes where each node contains data and a reference to the next node." },
+            { name: "Stacks & Queues", details: "Stacks follow LIFO, whereas Queues follow FIFO. Both are important for solving problems." },
+            { name: "Recursion", details: "Recursion is a function that calls itself, commonly used in tree traversal and backtracking." },
+            { name: "Sorting Algorithms", details: "Sorting algorithms like QuickSort and MergeSort optimize data organization." },
+            { name: "Searching Algorithms", details: "Binary search and linear search are key searching techniques." },
+            { name: "Hashing", details: "Hashing maps data to a fixed-size table using a hash function." },
+            { name: "Dynamic Programming", details: "An optimization technique solving problems by breaking them into overlapping subproblems." },
+            { name: "Graphs", details: "Graphs represent relationships using nodes and edges. BFS and DFS are traversal techniques." },
+            { name: "Trees", details: "Trees are hierarchical structures used in databases, file systems, and binary search trees." }
+        ];
+        
+        let completedTopics = JSON.parse(localStorage.getItem("completedTopics")) || [];
+
+        function renderTopics() {
+            const container = document.getElementById("topics");
+            container.innerHTML = "";
+            topics.forEach((topic, index) => {
+                const div = document.createElement("div");
+                div.classList.add("dsa-topic");
+                div.innerHTML = `
+                    <span onclick="toggleDetails(${index})">${topic.name}</span>
+                    <input type="checkbox" id="topic-${index}" ${completedTopics.includes(index) ? "checked" : ""} onclick="updateProgress(${index})">
+                    <div class="topic-details" id="details-${index}">${topic.details}</div>
+                `;
+                container.appendChild(div);
+            });
+            updateProgressBar();
+        }
+
+        function toggleDetails(index) {
+            let details = document.getElementById(`details-${index}`);
+            details.style.display = details.style.display === "block" ? "none" : "block";
+        }
+
+        function updateProgress(index) {
+            let checkbox = document.getElementById(`topic-${index}`);
+            if (checkbox.checked) {
+                if (!completedTopics.includes(index)) completedTopics.push(index);
+            } else {
+                completedTopics = completedTopics.filter(i => i !== index);
+            }
+            localStorage.setItem("completedTopics", JSON.stringify(completedTopics));
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            let progress = (completedTopics.length / topics.length) * 100;
+            document.getElementById("progress-bar").style.width = progress + "%";
+            document.getElementById("progress-text").innerText = Math.round(progress) + "%";
+        }
+
+        renderTopics();
+    </script>
+</body>
+</html>

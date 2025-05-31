@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            animation: fadeIn 1.5s ease-in;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: white;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-in-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .register-link, button {
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 10px;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .register-link {
+            color: #ff5e62;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        button {
+            border: none;
+            color: #ffffff;
+            background: #ff5e62;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        button:hover, .register-link:hover {
+            background: #ffd9b3;
+            transform: scale(1.1);
+        }
+
+        button a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO OUR DSA COURSE 2025</h1>
+    <a href='/register' class="register-link">REGISTER HERE</a>
+    <br><br>
+    <button><a href='/login'>LOGIN</a></button>
+</body>
+</html>

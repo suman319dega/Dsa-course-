@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DSA Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?technology,code') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+            animation: fadeIn 1.5s ease-in;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+            animation: slideUp 1s ease-out;
+            display: flex;
+            align-items: flex-start;
+        }
+        .progress-container {
+            margin-right: 20px;
+        }
+        .progress-bar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            line-height: 150px;
+            font-size: 20px;
+            font-weight: bold;
+            background: conic-gradient(red 0%, red 0%, gray 0%);
+            display: inline-block;
+            color: white;
+        }
+        .question-list {
+            list-style: none;
+            padding: 0;
+        }
+        .question-list li {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 15px rgba(255, 75, 43, 0.5);
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .question-list li:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        }
+        .question-list li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        .explanation {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .explain-btn {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            background: #ffcc00;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .congratulations {
+            display: none;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar">0%</div>
+        </div>
+        <div>
+            <h1>Suman Codes - DSA Practice</h1>
+            <ul class="question-list" id="question-list">
+                <script>
+                    const questions = [
+                        { name: "Two Sum", link: "https://leetcode.com/problems/two-sum/", explanation: "Find two numbers that add up to a target value." },
+                        { name: "Valid Parentheses", link: "https://leetcode.com/problems/valid-parentheses/", explanation: "Check if a string has valid opening and closing brackets." },
+                        { name: "Merge Two Sorted Lists", link: "https://leetcode.com/problems/merge-two-sorted-lists/", explanation: "Merge two sorted linked lists into one sorted linked list." },
+                        { name: "Best Time to Buy and Sell Stock", link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/", explanation: "Find the maximum profit from stock prices." },
+                        { name: "Longest Substring Without Repeating Characters", link: "https://leetcode.com/problems/longest-substring-without-repeating-characters/", explanation: "Find the longest substring with unique characters." },
+                        { name: "Search in Rotated Sorted Array", link: "https://leetcode.com/problems/search-in-rotated-sorted-array/", explanation: "Find a target value in a rotated sorted array." },
+                        { name: "Combination Sum", link: "https://leetcode.com/problems/combination-sum/", explanation: "Find all unique combinations that sum to a target." },
+                        { name: "Climbing Stairs", link: "https://leetcode.com/problems/climbing-stairs/", explanation: "Count distinct ways to reach the top of a staircase." },
+                        { name: "Same Tree", link: "https://leetcode.com/problems/same-tree/", explanation: "Check if two binary trees are identical." },
+                        { name: "Symmetric Tree", link: "https://leetcode.com/problems/symmetric-tree/", explanation: "Determine if a tree is symmetric around its center." },
+                        { name: "Binary Tree Inorder Traversal", link: "https://leetcode.com/problems/binary-tree-inorder-traversal/", explanation: "Traverse a binary tree in inorder fashion." },
+                        { name: "Valid Anagram", link: "https://leetcode.com/problems/valid-anagram/", explanation: "Check if two strings are anagrams." },
+                        { name: "Product of Array Except Self", link: "https://leetcode.com/problems/product-of-array-except-self/", explanation: "Find product of all elements except itself." }
+                    ];
+                    document.write(questions.map((q, index) => `
+                        <li>
+                            <input type='checkbox' class='question-checkbox' id='q${index}' onclick='updateProgress()'>
+                            <a href='${q.link}' target='_blank'>${q.name}</a>
+                            <button class='explain-btn' onclick='toggleExplanation(${index})'>Explain</button>
+                            <div id='explanation-${index}' class='explanation'>${q.explanation}</div>
+                        </li>`).join(""));
+                </script>
+            </ul>
+            <div id="congratulations" class="congratulations">🎉 Congratulations! You completed 100%! ✅</div>
+        </div>
+    </div>
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.question-checkbox');
+            let checkedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+            let percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            let progressBar = document.getElementById("progress-bar");
+            let color = percentage >= 100 ? 'green' : percentage >= 50 ? 'orange' : 'red';
+            progressBar.style.background = `conic-gradient(${color} ${percentage}%, gray ${percentage}%)`;
+            progressBar.textContent = `${percentage}%`;
+            let congrats = document.getElementById("congratulations");
+            if (percentage === 100) {
+                congrats.style.display = "block";
+            } else {
+                congrats.style.display = "none";
+            }
+        }
+        function toggleExplanation(index) {
+            let explanation = document.getElementById(`explanation-${index}`);
+            explanation.style.display = explanation.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
+
+
+

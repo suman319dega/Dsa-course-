@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            animation: gradientAnimation 6s infinite alternate;
+        }
+
+        @keyframes gradientAnimation {
+            from { background: linear-gradient(45deg, #6a11cb, #2575fc); }
+            to { background: linear-gradient(45deg, #ff512f, #dd2476); }
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 400px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            color: white;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus, select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        input[type="submit"] {
+            background: #ff512f;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.4s ease;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background: #dd2476;
+            transform: scale(1.05);
+        }
+
+        .register-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .register-link:hover {
+            color: #ff512f;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Register</h1>
+        <form action="/register" method="post">
+
+            <label>Full Name:</label>
+            <input type="text" name="fullname" placeholder="Enter your full name" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Phone Number:</label>
+            <input type="tel" name="phone" placeholder="Enter your phone number" required>
+
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Choose a username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Create a password" required>
+
+            <label>Confirm Password:</label>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+
+            <label>Gender:</label>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label>Date of Birth:</label>
+            <input type="date" name="dob" required>
+            
+         <input type="submit" value="REGISTER">
+        </form>
+
+        <a href="/login" class="register-link">Already have an account? Login</a>
+    </div>
+</body>
+</html>

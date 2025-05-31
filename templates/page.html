@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suman Codes - DSA Practice</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: textGlow 1.5s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0px 0px 10px #ff416c, 0px 0px 20px #ff4b2b; }
+            to { text-shadow: 0px 0px 20px #ff416c, 0px 0px 30px #ff4b2b; }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border-radius: 8px;
+            box-shadow: 0px 5px 20px rgba(255, 75, 43, 0.7);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            box-shadow: 0px 0px 30px rgba(255, 75, 43, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('concepts') }}" class="btn">📚 Quick DSA Revision</a>
+        <h1>Welcome to Suman Codes - DSA Practice</h1>
+        <p>Sharpen your problem-solving skills with our curated DSA challenges.</p>
+        <a href="{{ url_for('questions') }}" class="btn">🚀 Start Practicing</a>
+    </div>
+</body>
+</html>
